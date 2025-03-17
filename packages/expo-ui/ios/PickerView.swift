@@ -12,10 +12,14 @@ class PickerProps: ExpoSwiftUI.ViewProps {
   var onOptionSelected = EventDispatcher()
 }
 
-struct PickerView: ExpoSwiftUI.View {
+struct PickerView: ExpoSwiftUI.View, ExpoSwiftUI.WithHostingView {
   @State var selection: Int?
   @State var prevSelectedIndex: Int?
-  @EnvironmentObject var props: PickerProps
+  @ObservedObject var props: PickerProps
+
+  init(props: PickerProps) {
+    self.props = props
+  }
 
   var body: some View {
     if #available(iOS 17.0, tvOS 17.0, *) {
